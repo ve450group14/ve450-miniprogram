@@ -1,2 +1,3 @@
 <!--test.wxml-->
+<!-- 按钮 --->
 <button bindtap="clickToScan">Click to scan</button>

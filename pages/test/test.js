@@ -8,7 +8,6 @@ const db = wx.cloud.database().collection("food")
 Page({
   //添加数据
   clickToScan: function (){
-    var that = this;
     //扫码
     wx.scanCode({
       //扫码成功

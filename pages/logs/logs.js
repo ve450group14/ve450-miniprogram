@@ -1,4 +1,5 @@
 // logs.js
+//启动日志
 const util = require('../../utils/util.js')
 
 Page({

@@ -4,7 +4,7 @@ const app = getApp()
 
 Page({
   data: {
-    motto: 'Hello World',
+    motto: 'Welcome to Group 14 \n Smart Refrigerator',
     userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
@@ -13,6 +13,7 @@ Page({
   },
   // 事件处理函数
   bindViewTap() {
+    //跳到扫码页
     wx.navigateTo({
       url: '../test/test'
     })

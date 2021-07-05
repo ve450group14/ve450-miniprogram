@@ -1,4 +1,5 @@
 // app.js
+//云开发
 App({
   onLaunch: function(){
     wx.cloud.init({

@@ -1,3 +1,39 @@
 <!--test.wxml-->
-<!-- 按钮 --->
-<button bindtap="clickToScan">Click to scan</button>
+<view class="page">
+    <block wx:if="{{itemShow}}">
+        <mp-cell class="weui-slidecells">
+            <mp-slideview buttons="{{slideButtons}}" icon="{{true}}" bindbuttontap="slideButtonTap">
+                <view class="weui-slidecell">
+                    2021-07-28 奶酪棒
+                </view>
+            </mp-slideview>
+        </mp-cell>
+        <mp-cell class="weui-slidecells">
+            <mp-slideview buttons="{{slideButtons}}" icon="{{true}}" bindbuttontap="slideButtonTap">
+                <view class="weui-slidecell">
+                    2021-07-28 鸡块
+                </view>
+            </mp-slideview>
+        </mp-cell>
+        <mp-cell class="weui-slidecells">
+            <mp-slideview buttons="{{slideButtons}}" icon="{{true}}" bindbuttontap="slideButtonTap">
+                <view class="weui-slidecell">
+                    2021-07-28 麦当当
+                </view>
+            </mp-slideview>
+        </mp-cell>
+    </block>
+
+</view>
+
+<view class="main">
+    <mp-half-screen-dialog bindbuttontap="buttontap" show="{{show}}" maskClosable="{{false}}"
+        title="Expiration date reminder" desc="Choose how to add food expiration date"
+        tips="Click one of the button below">
+        <view slot="footer">
+            <button class="weui-btn" type="default" plain="true" bindtap="clickToScan">QRCode</button>
+            <button class="weui-btn" type="default" plain="true">Manual</button>
+        </view>
+    </mp-half-screen-dialog>
+    <button class="weui-btn" type="default" plain="true" bindtap="open">Click</button>
+</view>

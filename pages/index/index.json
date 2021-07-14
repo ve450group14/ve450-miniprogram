@@ -1,4 +1,6 @@
 {
-  "navigationBarTitleText": "首页",
-  "usingComponents": {}
+  "navigationBarTitleText": "Home",
+  "usingComponents": {
+    "mp-icon": "weui-miniprogram/icon/icon"
+  }
 }

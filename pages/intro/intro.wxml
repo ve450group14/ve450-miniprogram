@@ -1,0 +1,45 @@
+<!--pages/intro/intro.wxml-->
+<view class="page" data-weui-theme="{{theme}}">
+    <view class="page__bd">
+        <view class="weui-article">
+            <view class="weui-article__h1">Smart Refrigerator</view>
+            <view class="weui-article__section">
+                <view class="weui-article__section">
+                    <view class="weui-article__p">
+                        The design of refrigerator doors has a huge impact on the kitchen workflow and quality of life.
+                        We contribute to building an
+                        interactive refrigerator door prototype based on Raspberry Pi microcontroller, with embedded
+                        voice
+                        recognition system and intelligent user interface powered by Python modules and WeChat mini program.
+                    </view>
+                    <view class="weui-article__p">
+                        <image class="weui-article__img" src="../../images/sketch.jpg" mode="aspectFit"
+                            style="width: 100%" />
+                    </view>
+                </view>
+                <view class="weui-article__section">
+                    <view class="weui-article__h1">Core Features</view>
+                    <mp-icon type="outline" icon="mike" color="black" size="{{50}}"></mp-icon>
+                    <view class="weui-article__h2">Voice control fridge door</view>
+                    <view class="weui-article__p">
+                        Automatic refrigerator door control implemented with embedded voice recognition module in the
+                        controller.
+                    </view>
+                    <mp-icon type="outline" icon="bellring-on" color="black" size="{{50}}"></mp-icon>
+                    <view class="weui-article__h2">Expiration date reminder</view>
+                    <view class="weui-article__p">
+                        No more worries about forgetting the expiration date, as our intelligent
+                        model will remind you when the time is near.
+                    </view>
+                    <mp-icon type="outline" icon="time" color="black" size="{{50}}"></mp-icon>
+                    <view class="weui-article__h2">Defrost zone</view>
+                    <view class="weui-article__p">
+                        Independent defrost zone with remote temperature control to make your food available at any time
+                        as you wish.
+                    </view>
+                </view>
+            </view>
+        </view>
+        <!-- <mp-tabbar style="position:fixed;bottom:0;width:100%;left:0;right:0;" list="{{list}}" bindchange="tabChange"></mp-tabbar> -->
+    </view> 
+</view>

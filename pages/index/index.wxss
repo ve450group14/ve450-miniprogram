@@ -1,4 +1,5 @@
 /**index.wxss**/
+
 .userinfo {
   display: flex;
   flex-direction: column;
@@ -10,10 +11,37 @@
   overflow: hidden;
   width: 128rpx;
   height: 128rpx;
-  margin: 20rpx;
+  /* margin: 20rpx; */
   border-radius: 50%;
 }
 
 .usermotto {
-  margin-top: 200px;
+  display: block;
+  font-size: larger;
+  font-family: "muli-bold";
+  margin: 1rem auto 1rem auto;
+  text-align: center;
+}
+
+button {
+  margin-top: 20rpx;
+  margin-bottom: 20rpx;
+}
+
+.button1 {
+  background-color: rgb(56, 56, 56);
+  color: #fff;
+}
+
+.placeholder {
+  margin: 5rpx auto 0rpx auto;
+  /* padding: 0 10px; */
+  align-items: center;
+  height: 300rpx;
+  width: 200rpx;
+}
+
+.weui-flex {
+  width: 75%;
+  margin: 0 auto 0 auto;
 }

@@ -1,62 +1,57 @@
 <!--index.wxml-->
 <view class="page" data-weui-theme="{{theme}}">
-  <view class="page__hd">
-    <!-- <view class="page__title">Footer</view> -->
-    <!-- <view class="page__desc">页脚</view> -->
-  </view>
   <view class="page__bd page__bd_spacing">
-    <view style='opacity: {{opacity}};'>
-      <view class="userinfo">
-        <block wx:if="{{canIUseOpenData}}">
-          <view class="userinfo-avatar">
-            <open-data type="userAvatarUrl"></open-data>
-          </view>
-          <open-data type="userNickName"></open-data>
-
-
-        </block>
-        <block wx:elif="{{!hasUserInfo}}">
-          <button wx:if="{{canIUseGetUserProfile}}" bindtap="getUserProfile"> Click to get user info
-          </button>
-          <view wx:else> Can't get user info </view>
-        </block>
-        <block wx:else>
-          <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
-          <text class="userinfo-nickname">Hello, {{userInfo.nickName}}</text>
-        </block>
-      </view>
-    </view>
-    <view class="container log-list" style='opacity: {{1-opacity}};'>
-      <view class="weui-flex">
-        <view class="weui-flex__item">
-          <view class="placeholder">
-            <image class="brand" src="../../images/diagram1.svg"></image>
-          </view>
-        </view>
-        <view class="weui-flex__item">
-          <view class="placeholder">
-            <image class="brand" src="../../images/diagram2.svg"></image>
-          </view>
+    <match-media min-height="720" orientation="portrait">
+      <view style='opacity: {{opacity}};'>
+        <view class="userinfo">
+          <block wx:if="{{canIUseOpenData}}">
+            <view class="userinfo-avatar">
+              <open-data type="userAvatarUrl"></open-data>
+            </view>
+            <open-data type="userNickName"></open-data>
+          </block>
+          <block wx:elif="{{!hasUserInfo}}">
+            <button wx:if="{{canIUseGetUserProfile}}" bindtap="getUserProfile"> Click to get user info
+            </button>
+            <view wx:else> Can't get user info </view>
+          </block>
+          <block wx:else>
+            <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
+            <text class="userinfo-nickname">Hello, {{userInfo.nickName}}</text>
+          </block>
         </view>
       </view>
+    </match-media>
 
+    <view class="container">
+      <view class="container" style='opacity: {{1-opacity}};'>
+        <view class="weui-flex">
+          <view class="weui-flex__item">
+            <view class="placeholder">
+              <image class="brand" src="../../images/diagram1.svg"></image>
+            </view>
+          </view>
+          <view class="weui-flex__item">
+            <view class="placeholder">
+              <image class="brand" src="../../images/diagram2.svg"></image>
+            </view>
+          </view>
+        </view>
+      </view>
       <view class="usermotto">
         <text>Welcome to Group 14 \n Smart Refrigerator</text>
       </view>
-
       <view class="button-sp-area">
         <button class="button1" bindtap="bindViewTap1">Click to open</button>
         <button class="button2" bindtap="bindViewTap2">View details</button>
       </view>
     </view>
-
-
-
-    <view class="weui-footer weui-footer_fixed-bottom">
+    
+  </view>
+  <view class="weui-footer weui-footer_fixed-bottom">
       <view class="weui-footer__links">
         <a href="javascript:home();" class="weui-footer__link">VE450 SU2021</a>
       </view>
       <view class="weui-footer__text">Copyright © 2021 UM-SJTU Joint Institute</view>
     </view>
-  </view>
 </view>

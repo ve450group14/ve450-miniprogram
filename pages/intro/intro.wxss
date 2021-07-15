@@ -1,1 +1,5 @@
 /* pages/intro/intro.wxss */
+
+.weui-article__p {
+    font-family: "muli-light";
+}

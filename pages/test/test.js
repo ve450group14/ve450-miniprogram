@@ -79,7 +79,7 @@ Page({
       //扫码成功
       success: (res) => {
         wx.showToast({
-          title: "成功",
+          title: "Success",
           icon: "success",
           duration: 2000,
         });
@@ -106,8 +106,8 @@ Page({
       //扫码失败
       fail: (res) => {
         wx.showToast({
-          title: "失败",
-          icon: "success",
+          title: "Fail",
+          icon: "error",
           duration: 2000,
         });
         this.setData({

@@ -1,16 +1,39 @@
 <!--test.wxml-->
 <view class="page" data-weui-theme="{{theme}}">
     <view class="page__bd">
+
         <mp-toptips msg="No item available, click to add more" type="info" show="{{!itemShow}}" delay="4000">
         </mp-toptips>
-        <mp-toptips msg="Item successfully added, slide left to view more options" type="success" show="{{itemShow}}">
+
+        <mp-toptips msg="Successfully added, slide left to view more options" type="success" show="{{itemShow}}">
         </mp-toptips>
+
         <mp-toptips msg="Item deleted" type="error" show="{{itemDeleted}}"></mp-toptips>
+
+        <mp-toptips msg="Failed to add item, please scan the correct QR-Code" type="error" show="{{scanFail}}">
+        </mp-toptips>
+
         <block wx:if="{{!itemShow}}">
             <view class="code-icon">
                 <mp-icon icon="qr-code" color="grey" size="{{200}}"></mp-icon>
             </view>
         </block>
+
+        <mp-dialog title="{{food[currentIndex].name}}" show="{{showDel}}" bindbuttontap="chooseDelButton" buttons="{{delButtons}}">
+            <view>
+                Are you sure that you want to delete this item?
+            </view>
+        </mp-dialog>
+
+        <mp-dialog title="{{food[currentIndex].name}}" show="{{showInfo}}" bindbuttontap="tapConfirmButton" buttons="{{infoButton}}">
+            <view>
+                <text>
+                    Manufacturer: {{food[currentIndex].produce}}\n
+                    Expiration date: {{food[currentIndex].expiration}}\n
+                    Position: {{food[currentIndex].position}}
+                </text>
+            </view>
+        </mp-dialog>
 
         <view class="page-section">
             <view wx:for="{{food}}">
@@ -20,25 +43,10 @@
                             {{item.name}} {{item.produce}} {{item.expiration}}
                         </view>
                     </mp-slideview>
-                    <mp-dialog title="{{item.name}}" show="{{showDel}}" bindbuttontap="chooseDelButton"
-                        buttons="{{delButtons}}">
-                        <view>
-                            Are you sure that you want to delete this item?
-                        </view>
-                    </mp-dialog>
-                    <mp-dialog title="{{item.name}}" show="{{showInfo}}" bindbuttontap="tapConfirmButton"
-                        buttons="{{infoButton}}">
-                        <view>
-                            <text>
-                                Manufacturer: {{item.produce}}\n
-                                Expiration date: {{item.expiration}}\n
-                                Position: {{item.position}}
-                            </text>
-                        </view>
-                    </mp-dialog>
                 </mp-cell>
             </view>
         </view>
+
         <view class="main">
             <mp-half-screen-dialog bindbuttontap="buttontap" show="{{show}}" maskClosable="{{true}}"
                 title="Expiration date reminder" desc="Choose how to add food expiration date"

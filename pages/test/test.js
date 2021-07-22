@@ -15,6 +15,7 @@ Page({
 
   data: {
     show: false,
+    scanFail: false,
     itemShow: false,
     itemDeleted: false,
     food: [],
@@ -48,6 +49,10 @@ Page({
 
   slideButtonTap: function (e) {
     console.log("slide button tap", e.detail.index, e.mark.index);
+    this.currentIndex = e.mark.index;
+    this.setData({
+      currentIndex: e.mark.index,
+    });
     switch (e.detail.index) {
       case 0:
         this.tapInfoButton();
@@ -82,13 +87,13 @@ Page({
   },
 
   chooseDelButton: function (e) {
-    console.log("slide button tap", e.detail.index, e.mark.index);
+    console.log("slide button tap", e.detail.index);
     switch (e.detail.index) {
       case 0:
         this.tapConfirmButton();
         break;
       case 1:
-        this.data.food.splice(e.mark.index, 1);
+        this.data.food.splice(this.currentIndex, 1);
         this.setData({
           food: this.data.food,
           itemDeleted: true,
@@ -107,14 +112,13 @@ Page({
   clickToScan: function () {
     wx.scanCode({
       success: (res) => {
-        wx.showToast({
-          title: "Success",
-          icon: "success",
-          duration: 2000,
-        });
+        // wx.showToast({
+        //   title: "Success",
+        //   icon: "success",
+        //   duration: 2000,
+        // });
         var information = res.result.split(",");
         this.setData({
-          info: res.result,
           food: this.data.food.concat([
             {
               name: information[0],
@@ -144,10 +148,14 @@ Page({
         });
       },
       fail: (res) => {
-        wx.showToast({
-          title: "Fail",
-          icon: "error",
-          duration: 2000,
+        // wx.showToast({
+        //   title: "Fail",
+        //   icon: "error",
+        //   duration: 2000,
+        // });
+        this.setData({
+          scanFail: true,
+          show: false,
         });
       },
       complete: (res) => {},

@@ -42,8 +42,8 @@
         <text>Welcome to Group 14 \n Smart Refrigerator</text>
       </view>
       <view class="button-sp-area">
-        <button class="button1" bindtap="bindViewTap1">Click to open</button>
-        <button class="button2" bindtap="bindViewTap2">View details</button>
+        <button class="button1" bindtap="bindViewTap1">Open reminder</button>
+        <button class="button2" bindtap="bindViewTap2">Project details</button>
       </view>
     </view>
     

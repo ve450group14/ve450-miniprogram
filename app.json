@@ -1,54 +1,54 @@
 {
-  "tabBar": {
-    "list": [
-      {
-        "pagePath": "pages/index/index",
-        "iconPath": "./images/index.png",
-        "selectedIconPath": "./images/index_selected.png",
-        "text": "Home"
-      },
-      {
-        "pagePath": "pages/intro/intro",
-        "iconPath": "./images/file.png",
-        "selectedIconPath": "./images/file_selected.png",
-        "text": "Intro"
-      },
-      {
-        "pagePath": "pages/test/test",
-        "iconPath": "./images/scan.png",
-        "selectedIconPath": "./images/scan_selected.png",
-        "text": "Scan"
-      }
+    "tabBar": {
+        "list": [
+            {
+                "pagePath": "pages/index/index",
+                "iconPath": "./images/index.png",
+                "selectedIconPath": "./images/index_selected.png",
+                "text": "Home"
+            },
+            {
+                "pagePath": "pages/intro/intro",
+                "iconPath": "./images/file.png",
+                "selectedIconPath": "./images/file_selected.png",
+                "text": "Intro"
+            },
+            {
+                "pagePath": "pages/test/test",
+                "iconPath": "./images/scan.png",
+                "selectedIconPath": "./images/scan_selected.png",
+                "text": "Expiration"
+            }
+        ],
+        "color": "#383838",
+        "selectedColor": "#000",
+        "borderStyle": "white",
+        "backgroundColor": "#EDEDED"
+    },
+    "usingComponents": {},
+    "pages": [
+        "pages/index/index",
+        "pages/logs/logs",
+        "pages/test/test",
+        "pages/intro/intro"
     ],
-    "color": "#383838",
-    "selectedColor": "#000",
-    "borderStyle": "white",
-    "backgroundColor": "#EDEDED"
-  },
-  "usingComponents": {},
-  "pages": [
-    "pages/index/index",
-    "pages/logs/logs",
-    "pages/test/test",
-    "pages/intro/intro"
-  ],
-  "window": {
-    "backgroundTextStyle": "light",
-    "navigationBarTitleText": "VE450",
-    "navigationBarTextStyle": "black",
-    "backgroundColor": "#EDEDED",
-    "navigationBarBackgroundColor": "#EDEDED"
-  },
-  "networkTimeout": {
-    "request": 10000,
-    "connectSocket": 10000,
-    "uploadFile": 10000,
-    "downloadFile": 10000
-  },
-  "useExtendedLib": {
-    "kbone": true,
-    "weui": true
-  },
-  "style": "v2",
-  "sitemapLocation": "sitemap.json"
+    "window": {
+        "backgroundTextStyle": "light",
+        "navigationBarTitleText": "VE450",
+        "navigationBarTextStyle": "black",
+        "backgroundColor": "#EDEDED",
+        "navigationBarBackgroundColor": "#EDEDED"
+    },
+    "networkTimeout": {
+        "request": 10000,
+        "connectSocket": 10000,
+        "uploadFile": 10000,
+        "downloadFile": 10000
+    },
+    "useExtendedLib": {
+        "kbone": true,
+        "weui": true
+    },
+    "style": "v2",
+    "sitemapLocation": "sitemap.json"
 }

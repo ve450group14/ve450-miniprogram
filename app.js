@@ -6,6 +6,7 @@ const themeListeners = [];
 
 App({
   globalData: {
+    food: [],
     theme: "light", // dark
   },
   onLaunch: function () {

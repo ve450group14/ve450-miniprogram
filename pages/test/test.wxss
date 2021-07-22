@@ -1,5 +1,13 @@
-page {
-  /* height: 50%; */
+.slide-items {
+  height: 50%;
+}
+
+.code-icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-top: 200rpx;
 }
 
 .main {
@@ -10,10 +18,6 @@ page {
   justify-content: center;
   text-align: center;
   background-color: #EDEDED;
-}
-
-.weui-slidecells {
-  margin: 8px;
 }
 
 .weui-slidecell {
@@ -31,6 +35,7 @@ page {
 
 .dialog-button {
   position: fixed;
+  z-index: 10;
   bottom: 0;
   left: 0;
   right: 0;

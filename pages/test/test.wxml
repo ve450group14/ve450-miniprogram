@@ -1,41 +1,55 @@
 <!--test.wxml-->
 <view class="page" data-weui-theme="{{theme}}">
     <view class="page__bd">
-        <block wx:if="{{itemShow}}">
-            <mp-cell class="weui-slidecells">
-                <mp-slideview buttons="{{slideButtons}}" icon="{{true}}" bindbuttontap="slideButtonTap">
-                    <view class="weui-slidecell">
-                        2021-07-28 奶酪棒
-                    </view>
-                </mp-slideview>
-            </mp-cell>
-            <mp-cell class="weui-slidecells">
-                <mp-slideview buttons="{{slideButtons}}" icon="{{true}}" bindbuttontap="slideButtonTap">
-                    <view class="weui-slidecell">
-                        2021-07-28 鸡块
-                    </view>
-                </mp-slideview>
-            </mp-cell>
-            <mp-cell class="weui-slidecells">
-                <mp-slideview buttons="{{slideButtons}}" icon="{{true}}" bindbuttontap="slideButtonTap">
-                    <view class="weui-slidecell">
-                        2021-07-28 麦当当
-                    </view>
-                </mp-slideview>
-            </mp-cell>
+        <mp-toptips msg="No item available, click to add more" type="info" show="{{!itemShow}}" delay="4000">
+        </mp-toptips>
+        <mp-toptips msg="Item successfully added, slide left to view more options" type="success" show="{{itemShow}}">
+        </mp-toptips>
+        <mp-toptips msg="Item deleted" type="error" show="{{itemDeleted}}"></mp-toptips>
+        <block wx:if="{{!itemShow}}">
+            <view class="code-icon">
+                <mp-icon icon="qr-code" color="grey" size="{{200}}"></mp-icon>
+            </view>
         </block>
+
+        <view class="page-section">
+            <view wx:for="{{food}}">
+                <mp-cell mark:index="{{index}}" class="weui-slidecells">
+                    <mp-slideview buttons="{{slideButtons}}" icon="{{true}}" bindbuttontap="slideButtonTap">
+                        <view class="weui-slidecell" style="text-align:center">
+                            {{item.name}} {{item.produce}} {{item.expiration}}
+                        </view>
+                    </mp-slideview>
+                    <mp-dialog title="{{item.name}}" show="{{showDel}}" bindbuttontap="chooseDelButton"
+                        buttons="{{delButtons}}">
+                        <view>
+                            Are you sure that you want to delete this item?
+                        </view>
+                    </mp-dialog>
+                    <mp-dialog title="{{item.name}}" show="{{showInfo}}" bindbuttontap="tapConfirmButton"
+                        buttons="{{infoButton}}">
+                        <view>
+                            <text>
+                                Manufacturer: {{item.produce}}\n
+                                Expiration date: {{item.expiration}}\n
+                                Position: {{item.position}}
+                            </text>
+                        </view>
+                    </mp-dialog>
+                </mp-cell>
+            </view>
+        </view>
         <view class="main">
-            <mp-half-screen-dialog bindbuttontap="buttontap" show="{{show}}" maskClosable="{{false}}"
+            <mp-half-screen-dialog bindbuttontap="buttontap" show="{{show}}" maskClosable="{{true}}"
                 title="Expiration date reminder" desc="Choose how to add food expiration date"
                 tips="Click one of the button below">
                 <view slot="footer">
-                    <button class="weui-btn" type="default" plain="true" bindtap="clickToScan">QRCode</button>
-                    <button class="weui-btn" type="default" plain="true">Manual</button>
+                    <button class="weui-btn" type="default" plain="true" style="margin-bottom:4px"
+                        bindtap="clickToScan">QRCode</button>
+                    <button class="weui-btn" type="default" plain="true" style="margin-bottom:4px">Manual</button>
                 </view>
             </mp-half-screen-dialog>
-            <button class="weui-btn dialog-button" type="default" plain="true" bindtap="open">Click to scan</button>
+            <button class="weui-btn dialog-button" type="default" plain="true" bindtap="open">Add expiration</button>
         </view>
     </view>
-
-
 </view>

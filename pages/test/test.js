@@ -4,87 +4,130 @@ const app = getApp();
 
 //数据库初始化
 const db = wx.cloud.database().collection("food");
-// var base64 = require("../../img/base64");
+var base64 = require("../../images/base64");
 
 Page({
-  // onLoad: function () {
-  //   this.setData({
-  //     icon: base64.icon20,
-  //     slideButtons: [{
-  //       text: '普通',
-  //       src: '/img/icon_footer.png', // icon的路径
-  //     }, {
-  //       text: '普通',
-  //       extClass: 'test',
-  //       src: '/img/icon_nav_nav.png', // icon的路径
-  //     }, {
-  //       type: 'warn',
-  //       text: '警示',
-  //       extClass: 'test',
-  //       src: '/img/icon_intro.png', // icon的路径
-  //     }],
-  //   });
-  // },
-  //   onLoad: function(){
-  //       this.setData({
-  //           icon: base64.icon20,
-  //           slideButtons: [{
-  //             text: '普通',
-  //             src: '/page/weui/cell/icon_love.svg', // icon的路径
-  //           },{
-  //             text: '普通',
-  //             extClass: 'test',
-  //             src: '/page/weui/cell/icon_star.svg', // icon的路径
-  //           },{
-  //             type: 'warn',
-  //             text: '警示',
-  //             extClass: 'test',
-  //               src: '/page/weui/cell/icon_del.svg', // icon的路径
-  //           }],
-  //       });
-  //   },
-  // slideButtonTap(e) {
-  //   console.log('slide button tap', e.detail)
-  // },
-  // data: {
-  //   show: false,
-  //   buttons: [{
-  //       type: 'default',
-  //       className: '',
-  //       text: '辅助操作',
-  //       value: 0
-  //     },
-  //     {
-  //       type: 'primary',
-  //       className: '',
-  //       text: '主操作',
-  //       value: 1
-  //     }
-  //   ]
-  // },
-  data: {
-    itemShow: false,
+  onLoad: function () {
+    this.setData({
+      icon: base64.icon20,
+    });
   },
+
+  data: {
+    show: false,
+    itemShow: false,
+    itemDeleted: false,
+    food: [],
+    info: "",
+    showInfo: false,
+    showDel: false,
+    delButtons: [{ text: "Cancel" }, { text: "Confirm" }],
+    infoButton: [{ text: "OK" }],
+    slideButtons: [
+      {
+        type: "primary",
+        text: "info",
+        extClass: "test",
+        src: "/images/icon_nav_nav.png", // icon的路径
+        data: "item.index",
+      },
+      {
+        type: "warn",
+        text: "delete",
+        extClass: "test",
+        src: "/images/icon_del.svg", // icon的路径
+      },
+    ],
+  },
+
   open: function () {
     this.setData({
       show: true,
     });
   },
-  buttontap(e) {
-    console.log(e.detail);
+
+  slideButtonTap: function (e) {
+    console.log("slide button tap", e.detail.index, e.mark.index);
+    switch (e.detail.index) {
+      case 0:
+        this.tapInfoButton();
+        break;
+
+      case 1:
+        this.tapDelButton();
+        break;
+
+      default:
+        break;
+    }
   },
+
+  tapInfoButton: function (e) {
+    this.setData({
+      showInfo: true,
+    });
+  },
+
+  tapDelButton: function (e) {
+    this.setData({
+      showDel: true,
+    });
+  },
+
+  tapConfirmButton: function (e) {
+    this.setData({
+      showInfo: false,
+      showDel: false,
+    });
+  },
+
+  chooseDelButton: function (e) {
+    console.log("slide button tap", e.detail.index, e.mark.index);
+    switch (e.detail.index) {
+      case 0:
+        this.tapConfirmButton();
+        break;
+      case 1:
+        this.data.food.splice(e.mark.index, 1);
+        this.setData({
+          food: this.data.food,
+          itemDeleted: true,
+        });
+        if (this.data.food.length == 0) {
+          this.setData({
+            itemShow: false,
+          });
+        }
+        this.tapConfirmButton();
+      default:
+        break;
+    }
+  },
+
   clickToScan: function () {
-    //扫码
     wx.scanCode({
-      //扫码成功
       success: (res) => {
         wx.showToast({
           title: "Success",
           icon: "success",
           duration: 2000,
         });
-        var information = res.result.split("|");
+        var information = res.result.split(",");
+        this.setData({
+          info: res.result,
+          food: this.data.food.concat([
+            {
+              name: information[0],
+              produce: information[1],
+              expiration: information[2],
+              position: information[3],
+            },
+          ]),
+          itemShow: true,
+          show: false,
+        });
         //添加信息到数据库
+
         db.add({
           data: {
             name: information[0],
@@ -99,20 +142,13 @@ Page({
             console.log("添加失败", res);
           },
         });
-        this.setData({
-          itemShow: true
-        })
       },
-      //扫码失败
       fail: (res) => {
         wx.showToast({
           title: "Fail",
           icon: "error",
           duration: 2000,
         });
-        this.setData({
-          itemShow:false
-        })
       },
       complete: (res) => {},
     });

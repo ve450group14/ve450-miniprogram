@@ -23,7 +23,7 @@
   text-align: center;
 }
 
-.page__bd{
+.page__bd {
   padding-top: 20%;
 }
 

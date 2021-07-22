@@ -1,8 +1,12 @@
 <!--index.wxml-->
 <view class="page" data-weui-theme="{{theme}}">
-  <view class="page__bd page__bd_spacing">
+  <view class="page__bd page__bd_spacing main">
+    <match-media min-height="600" orientation="portrait">
+      <view style='height:40px;'></view>
+    </match-media>
     <match-media min-height="720" orientation="portrait">
-      <view style='opacity: {{opacity}};'>
+      <view style='height:40px;'></view>
+      <!-- <view style='opacity: {{opacity}};'></view>
         <view class="userinfo">
           <block wx:if="{{canIUseOpenData}}">
             <view class="userinfo-avatar">
@@ -20,7 +24,7 @@
             <text class="userinfo-nickname">Hello, {{userInfo.nickName}}</text>
           </block>
         </view>
-      </view>
+      </view> -->
     </match-media>
 
     <view class="container">
@@ -46,12 +50,12 @@
         <button class="button2" bindtap="bindViewTap2">Project details</button>
       </view>
     </view>
-    
+
   </view>
   <view class="weui-footer weui-footer_fixed-bottom">
-      <view class="weui-footer__links">
-        <a href="javascript:home();" class="weui-footer__link">VE450 SU2021</a>
-      </view>
-      <view class="weui-footer__text">Copyright © 2021 UM-SJTU Joint Institute</view>
+    <view class="weui-footer__links">
+      <a href="javascript:home();" class="weui-footer__link">VE450 SU2021</a>
     </view>
+    <view class="weui-footer__text">Copyright © 2021 UM-SJTU Joint Institute</view>
+  </view>
 </view>

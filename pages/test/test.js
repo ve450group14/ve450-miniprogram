@@ -15,6 +15,8 @@ Page({
 
   data: {
     show: false,
+    stickerShow: false,
+    formShow: false,
     scanFail: false,
     itemShow: false,
     itemDeleted: false,
@@ -22,8 +24,42 @@ Page({
     info: "",
     showInfo: false,
     showDel: false,
-    delButtons: [{ text: "Cancel" }, { text: "Confirm" }],
+    delButtons: [{ text: "Cancel" }, { text: "Delete" }],
     infoButton: [{ text: "OK" }],
+    rules: [
+      {
+        name: "name",
+        rules: { required: true, message: "name is required" },
+      },
+      {
+        name: "manufacturer",
+        rules: { required: true, message: "manufacturer is required" },
+      },
+      {
+        name: "position",
+        rules: { required: true, message: "position is required" },
+      },
+      {
+        name: "expiration",
+        rules: { required: true, message: "expiration is required" },
+      },
+    ],
+
+    positions: [
+      { name: "fridge", value: "0", checked: false },
+      { name: "freezer", value: "1", checked: false },
+      { name: "defrost zone", value: "2", checked: false },
+    ],
+
+    expiration: "---",
+
+    formData: {
+      name: "",
+      manufacturer: "",
+      position: "",
+      expiration: "",
+    },
+
     slideButtons: [
       {
         type: "primary",
@@ -41,9 +77,74 @@ Page({
     ],
   },
 
+  positionChange: function (e) {
+    console.log("position change, value：", e.detail.value);
+
+    var positions = this.data.positions;
+    for (var i = 0, len = positions.length; i < len; ++i) {
+      positions[i].checked = positions[i].value == e.detail.value;
+    }
+
+    this.setData({
+      positions: positions,
+      [`formData.position`]: e.detail.value,
+    });
+  },
+
+  bindDateChange: function (e) {
+    this.setData({
+      expiration: e.detail.value,
+      [`formData.expiration`]: e.detail.value,
+    });
+  },
+
+  formInputChange: function (e) {
+    const { field } = e.currentTarget.dataset;
+    this.setData({
+      [`formData.${field}`]: e.detail.value,
+    });
+  },
+
+  submitForm: function () {
+    this.selectComponent("#form").validate((valid, errors) => {
+      console.log("valid", valid, errors);
+      if (valid) {
+        this.setData({
+          food: this.data.food.concat([
+            {
+              name: this.data.formData.name,
+              produce: this.data.formData.manufacturer,
+              expiration: this.data.formData.expiration,
+              position: this.data.positions[this.data.formData.position].name,
+            },
+          ]),
+          scanFail: false,
+          itemDeleted: false,
+          stickerShow: true,
+          formShow: false,
+          itemShow: true,
+        });
+      } else {
+        const firstError = Object.keys(errors);
+        if (firstError.length) {
+          this.setData({
+            error: errors[firstError[0]].message,
+          });
+        }
+      }
+    });
+  },
+
   open: function () {
     this.setData({
       show: true,
+    });
+  },
+
+  openForm: function () {
+    this.setData({
+      formShow: true,
+      show: false,
     });
   },
 
@@ -127,25 +228,28 @@ Page({
               position: information[3],
             },
           ]),
+          scanFail: false,
+          itemDeleted: false,
           itemShow: true,
+          stickerShow: true,
           show: false,
         });
         //添加信息到数据库
 
-        db.add({
-          data: {
-            name: information[0],
-            produce: information[1],
-            expiration: information[2],
-            position: information[3],
-          },
-          success(res) {
-            console.log("添加成功", res);
-          },
-          fail(res) {
-            console.log("添加失败", res);
-          },
-        });
+        // db.add({
+        //   data: {
+        //     name: information[0],
+        //     produce: information[1],
+        //     expiration: information[2],
+        //     position: information[3],
+        //   },
+        //   success(res) {
+        //     console.log("添加成功", res);
+        //   },
+        //   fail(res) {
+        //     console.log("添加失败", res);
+        //   },
+        // });
       },
       fail: (res) => {
         // wx.showToast({
@@ -155,6 +259,8 @@ Page({
         // });
         this.setData({
           scanFail: true,
+          itemDeleted: false,
+          stickerShow: false,
           show: false,
         });
       },

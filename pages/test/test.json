@@ -1,4 +1,5 @@
 {
+  "navigationBarTitleText": "Expiration",
   "usingComponents": {
     "mp-half-screen-dialog": "weui-miniprogram/half-screen-dialog/half-screen-dialog",
     "mp-cells": "weui-miniprogram/cells/cells",
@@ -6,6 +7,10 @@
     "mp-slideview": "weui-miniprogram/slideview/slideview",
     "mp-dialog": "weui-miniprogram/dialog/dialog",
     "mp-toptips": "weui-miniprogram/toptips/toptips",
-    "mp-icon": "weui-miniprogram/icon/icon"
+    "mp-icon": "weui-miniprogram/icon/icon",
+    "mp-form-page": "weui-miniprogram/form-page/form-page",
+    "mp-form": "weui-miniprogram/form/form",
+    "mp-checkbox": "weui-miniprogram/checkbox/checkbox",
+    "mp-checkbox-group": "weui-miniprogram/checkbox-group/checkbox-group"
   }
 }

@@ -1,11 +1,11 @@
 <!--test.wxml-->
 <view class="page" data-weui-theme="{{theme}}">
-    <view class="page__bd">
+    <view wx:if="{{!formShow}}" class="page__bd">
 
-        <mp-toptips msg="No item available, click to add more" type="info" show="{{!itemShow}}" delay="4000">
+        <mp-toptips msg="No item available" type="info" show="{{!itemShow}}" delay="4000">
         </mp-toptips>
 
-        <mp-toptips msg="Successfully added, slide left to view more options" type="success" show="{{itemShow}}">
+        <mp-toptips msg="Item successfully added " type="success" show="{{stickerShow}}">
         </mp-toptips>
 
         <mp-toptips msg="Item deleted" type="error" show="{{itemDeleted}}"></mp-toptips>
@@ -19,13 +19,15 @@
             </view>
         </block>
 
-        <mp-dialog title="{{food[currentIndex].name}}" show="{{showDel}}" bindbuttontap="chooseDelButton" buttons="{{delButtons}}">
+        <mp-dialog title="{{food[currentIndex].name}}" show="{{showDel}}" bindbuttontap="chooseDelButton"
+            buttons="{{delButtons}}">
             <view>
                 Are you sure that you want to delete this item?
             </view>
         </mp-dialog>
 
-        <mp-dialog title="{{food[currentIndex].name}}" show="{{showInfo}}" bindbuttontap="tapConfirmButton" buttons="{{infoButton}}">
+        <mp-dialog title="{{food[currentIndex].name}}" show="{{showInfo}}" bindbuttontap="tapConfirmButton"
+            buttons="{{infoButton}}">
             <view>
                 <text>
                     Manufacturer: {{food[currentIndex].produce}}\n
@@ -34,6 +36,12 @@
                 </text>
             </view>
         </mp-dialog>
+
+        <block wx:if="{{itemShow}}">
+            <view class="weui-footer" style="padding-top:20px;">
+                ← slide for more options
+            </view>
+        </block>
 
         <view class="page-section">
             <view wx:for="{{food}}">
@@ -54,10 +62,43 @@
                 <view slot="footer">
                     <button class="weui-btn" type="default" plain="true" style="margin-bottom:4px"
                         bindtap="clickToScan">QRCode</button>
-                    <button class="weui-btn" type="default" plain="true" style="margin-bottom:4px">Manual</button>
+                    <button class="weui-btn" type="default" plain="true" style="margin-bottom:4px"
+                        bindtap="openForm">Manual</button>
                 </view>
             </mp-half-screen-dialog>
             <button class="weui-btn dialog-button" type="default" plain="true" bindtap="open">Add expiration</button>
         </view>
     </view>
+
+    <mp-form-page wx:if="{{formShow}}" title="Manually add expiration"
+        subtitle="please enter the information of the item">
+        <mp-form id="form" rules="{{rules}}" models="{{formData}}">
+            <mp-cells title="item">
+                <mp-cell prop="name" title="name" ext-class="">
+                    <input bindinput="formInputChange" data-field="name" class="weui-input"
+                        placeholder="please enter the name" />
+                </mp-cell>
+                <mp-cell prop="manufacturer" title="brand" ext-class=" weui-cell_vcode">
+                    <input bindinput="formInputChange" data-field="manufacturer" class="weui-input"
+                        placeholder="please enter the brand" />
+                </mp-cell>
+                <mp-cells title="position">
+                    <mp-checkbox-group prop="position" multi="{{false}}" bindchange="positionChange">
+                        <mp-checkbox wx:for="{{positions}}" wx:key="value" label="{{item.name}}" value="{{item.value}}"
+                            checked="{{item.checked}}"></mp-checkbox>
+                    </mp-checkbox-group>
+                </mp-cells>
+                <mp-cell prop="expiration" title="expiration" ext-class="">
+                    <picker data-field="expiration" mode="date" value="{{expiration}}" start="2021-08-01"
+                        end="2025-09-01" bindchange="bindDateChange">
+                        <view class="weui-input">{{expiration}}</view>
+                    </picker>
+                </mp-cell>
+            </mp-cells>
+        </mp-form>
+
+        <view class="weui-btn-area">
+            <button class="weui-btn" type="default" bindtap="submitForm">Confirm</button>
+        </view>
+    </mp-form-page>
 </view>
